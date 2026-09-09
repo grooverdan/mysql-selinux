@@ -1,4 +1,4 @@
-# mysql database server
+# mysql/mariadb database server
 
 #
 # /HOME
@@ -58,6 +58,9 @@ HOME_DIR/\.my\.cnf -- gen_context(system_u:object_r:mysqld_home_t, s0)
 #
 # /var
 #
+/var/lib/mariadb(-files|-keyring)?(/.*)?		gen_context(system_u:object_r:mysqld_db_t,s0)
+/var/lib/mariadb/mysql\.sock -s	gen_context(system_u:object_r:mysqld_var_run_t,s0)
+/var/lib/mariadb/mariadb\.sock -s	gen_context(system_u:object_r:mysqld_var_run_t,s0)
 /var/lib/mysql(-files|-keyring)?(/.*)?		gen_context(system_u:object_r:mysqld_db_t,s0)
 /var/lib/mysql/mysql(x)?\.sock -s	gen_context(system_u:object_r:mysqld_var_run_t,s0)
 
@@ -65,6 +68,9 @@ HOME_DIR/\.my\.cnf -- gen_context(system_u:object_r:mysqld_home_t, s0)
 /var/log/mysql(/.*)?	gen_context(system_u:object_r:mysqld_log_t,s0)
 /var/log/mysql.*	--	gen_context(system_u:object_r:mysqld_log_t,s0)
 
+/var/lib/mariadb/\.k5identity		gen_context(system_u:object_r:krb5_home_t,s0)
+/var/lib/mariadb/\.k5login		gen_context(system_u:object_r:krb5_home_t,s0)
+/var/lib/mariadb/\.k5users		gen_context(system_u:object_r:krb5_home_t,s0)
 /var/lib/mysql/\.k5identity		gen_context(system_u:object_r:krb5_home_t,s0)
 /var/lib/mysql/\.k5login		gen_context(system_u:object_r:krb5_home_t,s0)
 /var/lib/mysql/\.k5users		gen_context(system_u:object_r:krb5_home_t,s0)
